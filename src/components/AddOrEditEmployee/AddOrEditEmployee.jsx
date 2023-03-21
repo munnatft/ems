@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { employeeFormValidation } from "../../utils/validation";
+import ConfirmBox from "../ConfirmBox";
 import styles from "./AddOrEditEmployee.module.css";
 
 const AddOrEditEmployee = ({ isAdd }) => {
@@ -36,6 +37,7 @@ const AddOrEditEmployee = ({ isAdd }) => {
   };
   return (
     <>
+      <ConfirmBox />
       <h1 className={styles.title}>{`${isAdd ? "Add" : "Edit"}`} Employee</h1>
       <form className={styles.form} onSubmit={handleFormSubmit}>
         <div className={styles.fieldGroup}>
