@@ -1,0 +1,19 @@
+.table {
+    width: 100%;
+    padding: 2.4rem;
+}
+thead {
+    padding: 0.6rem 6.2rem 0.6rem 2.8rem;
+}
+thead th {
+    color: #2148C0;
+    font-size: 2rem;
+    line-height: 5.4rem;
+    text-align: start;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+}
+thead th:first-child {
+    padding-left: 2.7rem;
+}

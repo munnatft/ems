@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import styles from "./Login.module.css";
 import { loginValidation } from "../../utils/validation";
+import { setItemInLocalStorage } from "../../utils/helpers";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
@@ -11,11 +13,11 @@ const Login = () => {
   })
   const emailRef = useRef()
   const passwordRef = useRef()
+  const navigate = useNavigate()
 
   const loginFormSubmitHandler = (e) => {
     e.preventDefault()
     const {hasError,email,password} = loginValidation(emailRef.current.value, passwordRef.current.value)
-    console.log({hasError,email,password})
     if(hasError) {
         setError(prevState => ({
             ...prevState,
@@ -24,6 +26,8 @@ const Login = () => {
         }))
         return ;
     }
+    setItemInLocalStorage("__LOGGED_IN_USER__", { isUserLoggedIn: true, email: emailRef.current.value })
+    navigate("/")
   }
   return (
     <main className={styles.loginContainer}>
