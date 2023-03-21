@@ -1,0 +1,38 @@
+.title {
+    padding-top: 4rem;
+    font-size: 2rem;
+    line-height: 2rem;
+    width: 30rem;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    font-family: 'Montserrat';
+    font-weight: 700;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2.4rem;
+    margin: 13.2rem auto 19.1rem;
+    width: 68.4rem;
+
+}
+.fieldGroup {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 3.5rem 8.4rem;
+}
+.btnGroup {
+    margin-top: 7.1rem;
+    display: flex;
+    gap: 3.5rem 8.4rem;
+}
+.discardBtn {
+    border-color: white;
+    background-color: #2148C0;
+    color: #fff;
+    width: 50%;
+}
+.submitBtn {
+    width: 50%;
+}

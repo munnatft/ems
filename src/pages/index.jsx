@@ -4,6 +4,7 @@ import { getUserFromLocalStorage } from "../utils/helpers";
 
 const Login = lazy(() => import("./Login"));
 const EmployeesList = lazy(() => import("./EmployeesList"));
+const AddEmployee = lazy(() => import("./AddEmployee"));
 
 const PrivateRoute = ({ children }) => {
   const user = getUserFromLocalStorage();
@@ -28,6 +29,14 @@ const Page = () => {
           element={
             <PrivateRoute>
               <EmployeesList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/add"
+          element={
+            <PrivateRoute>
+              <AddEmployee />
             </PrivateRoute>
           }
         />
