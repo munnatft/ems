@@ -56,7 +56,7 @@ const EmployeesList = () => {
                   <td>{`XXXXXX` + `${e.phoneNumber}`.slice(-4)}</td>
                   <td>{e.domain}</td>
                   <td>
-                    <span className={styles.edit} onClick={() => {}} >
+                    <span className={styles.edit} onClick={() => navigate("/edit",{state:{employee:e}})} >
                       Edit
                     </span>
                     <span className={styles.delete} onClick={() => openConfirmBox(e.id)} >

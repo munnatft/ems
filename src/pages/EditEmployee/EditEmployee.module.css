@@ -1,0 +1,6 @@
+.editEmployeeContainer {
+    width: 100vw;
+    min-height: 100dvh;
+    overflow-y: auto;
+    background-color: #2148C0;
+}

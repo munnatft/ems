@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { employeeFormValidation } from "../../utils/validation";
 import {ConfirmBox} from "../ConfirmBox";
 import {useEmployee} from "../../provider/EmployeeProvider";
@@ -12,7 +12,7 @@ const errorInitialState = {
   domain: "",
 }
 
-const AddOrEditEmployee = ({ isAdd }) => {
+const AddOrEditEmployee = ({ isAdd, employee }) => {
   const [error, setError] = useState(errorInitialState);
   const [isOpen, setIsOpen] = useState(false)
   const firstNameRef = useRef();
@@ -23,12 +23,31 @@ const AddOrEditEmployee = ({ isAdd }) => {
 
   const navigate = useNavigate()
 
-  const {addEmployee} = useEmployee()
+  const {addEmployee,updateEmployee} = useEmployee()
+
+  useEffect(() => {
+    if(!isAdd && employee) {
+      firstNameRef.current.value = employee.firstName
+      lastNameRef.current.value = employee.lastName
+      emaiRef.current.value = employee.email
+      phoneNumberRef.current.value = employee.phoneNumber
+      domainRef.current.value = employee.domain
+    }
+  },[isAdd,employee])
 
   const onConfirmClick = () => {
     if(isAdd) {
       addEmployee({
         id: new Date().toISOString(),
+        firstName: firstNameRef.current.value,
+        lastName: lastNameRef.current.value,
+        email: emaiRef.current.value,
+        phoneNumber: phoneNumberRef.current.value,
+        domain: domainRef.current.value
+      })
+    } else {
+      updateEmployee({
+        id: employee?.id,
         firstName: firstNameRef.current.value,
         lastName: lastNameRef.current.value,
         email: emaiRef.current.value,

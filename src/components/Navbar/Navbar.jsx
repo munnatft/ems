@@ -1,14 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { menuIcon } from "../../assets";
+import { useEmployee } from "../../provider/EmployeeProvider";
 import styles from "./Navbar.module.css";
 
 const Navbar = ({
   email
 }) => {
   const navigate = useNavigate();
+  const {resetEmployees} = useEmployee()
 
   const handleLogout = () => {
     localStorage.clear();
+    resetEmployees()
     navigate("/login");
   };
   return (

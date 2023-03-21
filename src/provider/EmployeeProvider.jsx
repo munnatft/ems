@@ -4,7 +4,8 @@ const intialState = {
     employees: [],
     addEmployee: () => {},
     updateEmployee: () => {},
-    deleteEmployee: () => {}
+    deleteEmployee: () => {},
+    resetEmployees: () => {},
 }
 
 const EmployeeContext = createContext(intialState)
@@ -32,11 +33,14 @@ const EmployeeProvider = ({children}) => {
         setEmployees(newEmployees)
     }
 
+    const resetEmployees = () => setEmployees([])
+
     const value = {
         employees,
         addEmployee,
         updateEmployee,
-        deleteEmployee
+        deleteEmployee,
+        resetEmployees
     }
   return (
     <EmployeeContext.Provider value={value} >
