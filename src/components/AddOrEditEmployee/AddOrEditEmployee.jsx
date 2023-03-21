@@ -5,13 +5,15 @@ import {useEmployee} from "../../provider/EmployeeProvider";
 import styles from "./AddOrEditEmployee.module.css";
 import { useNavigate } from "react-router-dom";
 
+const errorInitialState = {
+  firstName: "",
+  email: "",
+  phoneNumber: "",
+  domain: "",
+}
+
 const AddOrEditEmployee = ({ isAdd }) => {
-  const [error, setError] = useState({
-    firstName: "",
-    email: "",
-    phoneNumber: "",
-    domain: "",
-  });
+  const [error, setError] = useState(errorInitialState);
   const [isOpen, setIsOpen] = useState(false)
   const firstNameRef = useRef();
   const lastNameRef = useRef();
@@ -35,6 +37,18 @@ const AddOrEditEmployee = ({ isAdd }) => {
       })
     }
     navigate("/")
+  }
+
+  const onDiscardClick = () => {
+    if(!isAdd) {
+      return navigate("/")
+    }
+    firstNameRef.current.value = ""
+    lastNameRef.current.value = ""
+    emaiRef.current.value = ""
+    phoneNumberRef.current.value = ""
+    domainRef.current.value = ""
+    setError(errorInitialState)
   }
 
   const handleFormSubmit = (e) => {
@@ -104,7 +118,7 @@ const AddOrEditEmployee = ({ isAdd }) => {
           </div>
         </div>
         <div className={styles.btnGroup}>
-          <button className={styles.discardBtn} type="button">Discard</button>
+          <button className={styles.discardBtn} onClick={onDiscardClick} type="button">Discard</button>
           <button className={styles.submitBtn} type="submit">
             Submit
           </button>
