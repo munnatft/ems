@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { employeeFormValidation } from "../../utils/validation";
-import ConfirmBox from "../ConfirmBox";
+import {ConfirmBox} from "../ConfirmBox";
 import {useEmployee} from "../../provider/EmployeeProvider";
 import styles from "./AddOrEditEmployee.module.css";
 import { useNavigate } from "react-router-dom";

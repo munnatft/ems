@@ -1,1 +1,1 @@
-export {default} from "./ConfirmBox"
+export {default as ConfirmBox} from "./ConfirmBox"
