@@ -1,7 +1,9 @@
 import React, { useRef, useState } from "react";
 import { employeeFormValidation } from "../../utils/validation";
 import ConfirmBox from "../ConfirmBox";
+import {useEmployee} from "../../provider/EmployeeProvider";
 import styles from "./AddOrEditEmployee.module.css";
+import { useNavigate } from "react-router-dom";
 
 const AddOrEditEmployee = ({ isAdd }) => {
   const [error, setError] = useState({
@@ -10,11 +12,31 @@ const AddOrEditEmployee = ({ isAdd }) => {
     phoneNumber: "",
     domain: "",
   });
+  const [isOpen, setIsOpen] = useState(false)
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const emaiRef = useRef();
   const domainRef = useRef();
   const phoneNumberRef = useRef();
+
+  const navigate = useNavigate()
+
+  const {addEmployee} = useEmployee()
+
+  const onConfirmClick = () => {
+    if(isAdd) {
+      addEmployee({
+        id: new Date().toISOString(),
+        firstName: firstNameRef.current.value,
+        lastName: lastNameRef.current.value,
+        email: emaiRef.current.value,
+        phoneNumber: phoneNumberRef.current.value,
+        domain: domainRef.current.value
+      })
+    }
+    navigate("/")
+  }
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const {hasError,firstName,email,phoneNumber,domain} = employeeFormValidation({
@@ -23,7 +45,6 @@ const AddOrEditEmployee = ({ isAdd }) => {
       phoneNumberVal: phoneNumberRef.current.value, 
       domainVal: domainRef.current.value
     })
-    console.log({hasError,firstName,email,phoneNumber,domain})
     if(hasError) {
       setError(prevState => ({
         ...prevState,
@@ -34,10 +55,19 @@ const AddOrEditEmployee = ({ isAdd }) => {
       }))
       return ;
     }
+    setIsOpen(true)
   };
+
   return (
     <>
-      <ConfirmBox />
+      {
+        isOpen && (
+          <ConfirmBox 
+            onConfirmBtnClick={onConfirmClick}
+            onCancelBtnClick={() => setIsOpen(false)}
+          />
+        )
+      }
       <h1 className={styles.title}>{`${isAdd ? "Add" : "Edit"}`} Employee</h1>
       <form className={styles.form} onSubmit={handleFormSubmit}>
         <div className={styles.fieldGroup}>
